@@ -7,7 +7,8 @@ import {
 	isMapType,
 	RecordType,
 	EnumType,
-	isOptional
+	isOptional,
+	isStringReplacementType
 } from "./model";
 export { RecordType } from "./model";
 /** Convert a primitive type from avro to TypeScript */
@@ -61,6 +62,10 @@ function convertType(type: Type, buffer: string[]): string {
 	} else if (type instanceof Array) {
 		// array means a Union. Use the names and call recursively
 		return type.map(t => convertType(t, buffer)).join(" | ");
+	} else if (isStringReplacementType(type)) {
+		// It means that some original type is represented as String.
+		// E.g.: Java Instant is represented as String.
+		return "string";
 	} else if (isRecordType(type)) {
 		//} type)) {
 		// record, use the name and add to the buffer

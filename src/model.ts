@@ -42,6 +42,15 @@ export interface NamedType extends BaseType {
 	type: string;
 }
 
+export interface StringReplacementType extends BaseType {
+	type: "string";
+	originalType: string;
+}
+
+export function isStringReplacementType(type: BaseType): type is StringReplacementType {
+	return type.type === "string" && 'originalType' in type;
+}
+
 export function isRecordType(type: BaseType): type is RecordType {
 	return type.type === "record";
 }
