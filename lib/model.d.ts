@@ -33,6 +33,11 @@ export interface EnumType extends BaseType {
 export interface NamedType extends BaseType {
     type: string;
 }
+export interface StringReplacementType extends BaseType {
+    type: "string";
+    originalType: string;
+}
+export declare function isStringReplacementType(type: BaseType): type is StringReplacementType;
 export declare function isRecordType(type: BaseType): type is RecordType;
 export declare function isArrayType(type: BaseType): type is ArrayType;
 export declare function isMapType(type: BaseType): type is MapType;
